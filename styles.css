@@ -1,3 +1,16 @@
 html {
   font-family: Poppins, sans-serif;
 }
+
+body {
+  margin: 0;
+}
+
+/* HEADER */
+#header {
+  display: flex;
+  justify-content: center;
+
+  color: black;
+  background-color: aquamarine;
+}
