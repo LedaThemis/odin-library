@@ -60,6 +60,7 @@ function getBookHTML(book, i) {
     ? readButton.classList.add("read")
     : readButton.classList.add("notread");
   readButton.textContent = "Read";
+  readButton.addEventListener("click", (e) => handleUpdateReadStatus(e, i));
   bookDiv.appendChild(readButton);
 
   return bookDiv;
@@ -110,6 +111,12 @@ function handleRemoveBook(e, i) {
 
 function removeAtIndex(arr, i) {
   return arr.slice(0, i).concat(arr.slice(i + 1));
+}
+
+// HANDLE UPDATE READ STATUS
+function handleUpdateReadStatus(e, i) {
+  library[i].changeReadStatus();
+  displayBooks();
 }
 
 const theHobbit1 = new Book("The Hobbit1", "J.R.R. Tolkein", "265", true);
