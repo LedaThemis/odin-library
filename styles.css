@@ -84,3 +84,26 @@ body {
 .remove--book--button:hover {
   color: red;
 }
+
+/* FORM */
+#add-book-form {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+
+  color: white;
+  background-color: #2e9960;
+  padding: 1rem;
+}
+
+#add-book-form > p {
+  align-self: center;
+}
+
+#add-book-form > button {
+  border: none;
+  color: white;
+  padding: 0.2rem;
+  background-color: #15673b;
+  cursor: pointer;
+}
