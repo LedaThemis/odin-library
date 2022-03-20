@@ -63,7 +63,17 @@ function getBookHTML(book) {
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkein", "265", true);
-
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
+addBookToLibrary(theHobbit);
 displayBooks();
 
 // NEW BOOK
@@ -74,4 +84,13 @@ newBookButton.addEventListener("click", handleNewBookClick);
 function handleNewBookClick(e) {
   const form = document.querySelector("#add-book-form");
   form.style.display = "flex";
+}
+
+// CLOSE FORM BUTTON
+const closeFormButton = document.querySelector("#close--form--button");
+closeFormButton.addEventListener("click", handleCloseFormClick);
+
+function handleCloseFormClick(e) {
+  const form = document.querySelector("#add-book-form");
+  form.style.display = "none";
 }

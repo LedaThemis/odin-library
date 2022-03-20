@@ -108,7 +108,7 @@ body {
   cursor: pointer;
 }
 
-.close--form--button {
+#close--form--button {
   align-self: flex-end;
 }
 
