@@ -107,3 +107,16 @@ body {
   background-color: #15673b;
   cursor: pointer;
 }
+
+/* ADD NEW BOOK */
+#add-new-book {
+  border: none;
+  background-color: rgb(0, 255, 170);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: inherit;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+}
