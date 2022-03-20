@@ -40,7 +40,6 @@ body {
   flex-direction: column;
 
   border: 0.2rem solid burlywood;
-  padding-top: 2rem;
 
   background-color: antiquewhite;
 }
@@ -68,4 +67,20 @@ body {
 
 .notread {
   background-color: lightcoral;
+}
+
+.remove--book--button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  font-size: 1.5rem;
+
+  align-self: flex-end;
+  justify-self: flex-start;
+
+  cursor: pointer;
+}
+
+.remove--book--button:hover {
+  color: red;
 }
