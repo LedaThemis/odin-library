@@ -118,11 +118,3 @@ function handleUpdateReadStatus(e, i) {
   library[i].changeReadStatus();
   displayBooks();
 }
-
-const theHobbit1 = new Book("The Hobbit1", "J.R.R. Tolkein", "265", true);
-const theHobbit2 = new Book("The Hobbit2", "J.R.R. Tolkein", "265", true);
-const theHobbit3 = new Book("The Hobbit3", "J.R.R. Tolkein", "265", true);
-addBookToLibrary(theHobbit1);
-addBookToLibrary(theHobbit2);
-addBookToLibrary(theHobbit3);
-displayBooks();
