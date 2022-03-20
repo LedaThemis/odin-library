@@ -14,3 +14,58 @@ body {
   color: black;
   background-color: aquamarine;
 }
+
+/* MAIN */
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 2rem;
+}
+
+/* BOOK */
+#books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+
+  width: 100%;
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  border: 0.2rem solid burlywood;
+  padding-top: 2rem;
+
+  background-color: antiquewhite;
+}
+
+.book--title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.book--author {
+  font-size: 1.5rem;
+}
+
+.book--read--button {
+  border: none;
+  height: 3rem;
+  width: 100%;
+
+  cursor: pointer;
+}
+
+.read {
+  background-color: lightgreen;
+}
+
+.notread {
+  background-color: lightcoral;
+}
