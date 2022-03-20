@@ -48,7 +48,7 @@ function getBookHTML(book) {
 
   const pages = document.createElement("p");
   pages.classList.add("book--pages");
-  pages.textContent = book.pages;
+  pages.textContent = book.pages + " pages";
   bookDiv.appendChild(pages);
 
   const readButton = document.createElement("button");
@@ -64,17 +64,6 @@ function getBookHTML(book) {
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkein", "265", true);
 addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-addBookToLibrary(theHobbit);
-displayBooks();
 
 // NEW BOOK
 const newBookButton = document.querySelector("#add-new-book");
@@ -93,4 +82,22 @@ closeFormButton.addEventListener("click", handleCloseFormClick);
 function handleCloseFormClick(e) {
   const form = document.querySelector("#add-book-form");
   form.style.display = "none";
+}
+
+// SUBMIT FORM
+const addBook = document.querySelector("#add-book");
+addBook.addEventListener("click", handleAddBook);
+
+function handleAddBook(e) {
+  e.preventDefault();
+  const formData = new FormData(document.querySelector("#add-book-form"));
+  const title = formData.get("title");
+  const author = formData.get("author");
+  const pages = formData.get("pages");
+  const isRead = formData.get("isRead") ? true : false;
+
+  const book = new Book(title, author, pages, isRead);
+
+  addBookToLibrary(book);
+  displayBooks();
 }
