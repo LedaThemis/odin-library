@@ -58,6 +58,9 @@ body {
   height: 3rem;
   width: 100%;
 
+  font-family: inherit;
+  font-weight: bold;
+
   cursor: pointer;
 }
 

@@ -56,10 +56,13 @@ function getBookHTML(book, i) {
 
   const readButton = document.createElement("button");
   readButton.classList.add("book--read--button");
-  book.isRead
-    ? readButton.classList.add("read")
-    : readButton.classList.add("notread");
-  readButton.textContent = "Read";
+  if (book.isRead) {
+    readButton.classList.add("read");
+    readButton.textContent = "Read";
+  } else {
+    readButton.classList.add("notread");
+    readButton.textContent = "Not read";
+  }
   readButton.addEventListener("click", (e) => handleUpdateReadStatus(e, i));
   bookDiv.appendChild(readButton);
 
