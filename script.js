@@ -1,9 +1,9 @@
 let library = [];
 
 function Book(title, author, pages, isRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
+  this.title = title === "" ? "Unknown" : title;
+  this.author = author === "" ? "Unknown" : author;
+  this.pages = pages === "" ? "Unknown" : pages;
   this.isRead = isRead;
 }
 
@@ -19,21 +19,24 @@ function displayBooks() {
   const booksContainer = document.querySelector("#books-container");
   booksContainer.replaceChildren();
 
-  library.forEach((b) => appendBookToContainer(b));
+  library.forEach((b, i) => appendBookToContainer(b, i));
 }
 
-function appendBookToContainer(b) {
+function appendBookToContainer(b, i) {
   const bookContainer = document.querySelector("#books-container");
-  bookContainer.appendChild(getBookHTML(b));
+  const bookHTML = getBookHTML(b, i);
+  bookContainer.appendChild(bookHTML);
 }
 
-function getBookHTML(book) {
+function getBookHTML(book, i) {
   const bookDiv = document.createElement("div");
   bookDiv.classList.add("book");
+  bookDiv.dataset.key = i;
 
   const removeButton = document.createElement("button");
   removeButton.classList.add("remove--book--button");
   removeButton.textContent = "✕";
+  removeButton.addEventListener("click", (e) => handleRemoveBook(e, i));
   bookDiv.appendChild(removeButton);
 
   const title = document.createElement("p");
@@ -61,9 +64,6 @@ function getBookHTML(book) {
 
   return bookDiv;
 }
-
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkein", "265", true);
-addBookToLibrary(theHobbit);
 
 // NEW BOOK
 const newBookButton = document.querySelector("#add-new-book");
@@ -101,3 +101,21 @@ function handleAddBook(e) {
   addBookToLibrary(book);
   displayBooks();
 }
+
+// REMOVE BOOK
+function handleRemoveBook(e, i) {
+  library = removeAtIndex(library, i);
+  displayBooks();
+}
+
+function removeAtIndex(arr, i) {
+  return arr.slice(0, i).concat(arr.slice(i + 1));
+}
+
+const theHobbit1 = new Book("The Hobbit1", "J.R.R. Tolkein", "265", true);
+const theHobbit2 = new Book("The Hobbit2", "J.R.R. Tolkein", "265", true);
+const theHobbit3 = new Book("The Hobbit3", "J.R.R. Tolkein", "265", true);
+addBookToLibrary(theHobbit1);
+addBookToLibrary(theHobbit2);
+addBookToLibrary(theHobbit3);
+displayBooks();
