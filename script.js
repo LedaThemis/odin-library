@@ -65,3 +65,13 @@ function getBookHTML(book) {
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkein", "265", true);
 
 displayBooks();
+
+// NEW BOOK
+const newBookButton = document.querySelector("#add-new-book");
+
+newBookButton.addEventListener("click", handleNewBookClick);
+
+function handleNewBookClick(e) {
+  const form = document.querySelector("#add-book-form");
+  form.style.display = "flex";
+}

@@ -108,6 +108,10 @@ body {
   cursor: pointer;
 }
 
+.close--form--button {
+  align-self: flex-end;
+}
+
 /* ADD NEW BOOK */
 #add-new-book {
   border: none;
