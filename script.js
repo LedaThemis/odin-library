@@ -8,11 +8,12 @@ class Book {
     this.pages = pages === "" ? "Unknown" : pages;
     this.isRead = isRead;
   }
+
+  changeReadStatus() {
+    this.isRead = !this.isRead;
+  }
 }
 
-Book.prototype.changeReadStatus = function () {
-  this.isRead = !this.isRead;
-};
 
 function addBookToLibrary(book) {
   library.push(book);
