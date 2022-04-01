@@ -1,6 +1,3 @@
-let library = [];
-
-
 class Book {
   constructor(title, author, pages, isRead) {
     this.title = title === "" ? "Unknown" : title;
@@ -14,16 +11,35 @@ class Book {
   }
 }
 
+class Library {
+  constructor() {
+    this.books = [];
+  }
 
-function addBookToLibrary(book) {
-  library.push(book);
+  addBook(book) {
+    this.books.push(book);
+    displayBooks(this.books)
+  }
+
+  handleRemoveBook(e, i) {
+    this.books = removeAtIndex(this.books, i);
+    displayBooks(this.books);
+  }
 }
 
-function displayBooks() {
+
+const library = new Library();
+
+
+function removeAtIndex(arr, i) {
+  return arr.slice(0, i).concat(arr.slice(i + 1));
+}
+
+function displayBooks(books) {
   const booksContainer = document.querySelector("#books-container");
   booksContainer.replaceChildren();
 
-  library.forEach((b, i) => appendBookToContainer(b, i));
+  books.forEach((b, i) => appendBookToContainer(b, i));
 }
 
 function appendBookToContainer(b, i) {
@@ -40,7 +56,7 @@ function getBookHTML(book, i) {
   const removeButton = document.createElement("button");
   removeButton.classList.add("remove--book--button");
   removeButton.textContent = "✕";
-  removeButton.addEventListener("click", (e) => handleRemoveBook(e, i));
+  removeButton.addEventListener("click", (e) => library.handleRemoveBook(e, i));
   bookDiv.appendChild(removeButton);
 
   const title = document.createElement("p");
@@ -106,22 +122,12 @@ function handleAddBook(e) {
 
   const book = new Book(title, author, pages, isRead);
 
-  addBookToLibrary(book);
-  displayBooks();
+  library.addBook(book);
 }
 
-// REMOVE BOOK
-function handleRemoveBook(e, i) {
-  library = removeAtIndex(library, i);
-  displayBooks();
-}
-
-function removeAtIndex(arr, i) {
-  return arr.slice(0, i).concat(arr.slice(i + 1));
-}
 
 // HANDLE UPDATE READ STATUS
 function handleUpdateReadStatus(e, i) {
-  library[i].changeReadStatus();
-  displayBooks();
+  library.books[i].changeReadStatus();
+  displayBooks(library.books);
 }
