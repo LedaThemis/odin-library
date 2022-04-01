@@ -1,10 +1,13 @@
 let library = [];
 
-function Book(title, author, pages, isRead) {
-  this.title = title === "" ? "Unknown" : title;
-  this.author = author === "" ? "Unknown" : author;
-  this.pages = pages === "" ? "Unknown" : pages;
-  this.isRead = isRead;
+
+class Book {
+  constructor(title, author, pages, isRead) {
+    this.title = title === "" ? "Unknown" : title;
+    this.author = author === "" ? "Unknown" : author;
+    this.pages = pages === "" ? "Unknown" : pages;
+    this.isRead = isRead;
+  }
 }
 
 Book.prototype.changeReadStatus = function () {
