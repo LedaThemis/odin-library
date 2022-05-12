@@ -1,4 +1,4 @@
-import { addBookToFirestore } from '../index';
+import { addBookToFirestore, removeBookFromFirestore } from '../index';
 class Library {
   constructor() {
     this.books = [];
@@ -16,6 +16,7 @@ class Library {
 
   removeBook(bookID) {
     this.books = this.books.filter(({ book, id }) => id !== bookID);
+    removeBookFromFirestore(bookID);
   }
 
   getBook(bookID) {

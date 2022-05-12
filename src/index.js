@@ -99,10 +99,10 @@ const readBooksFromFirestore = async () => {
   return resultArray;
 };
 
-const removeBookFromFirestore = async () => {
+const removeBookFromFirestore = async (bookID) => {
   const currentUserUID = `${getAuth().currentUser.uid}`;
 
-  await doc(db, currentUserUID);
+  await deleteDoc(doc(db, currentUserUID, bookID));
 };
 
 // Helpers
@@ -139,4 +139,4 @@ addBookButton.addEventListener('click', (e) => {
   ui.handleAddBook(e);
 });
 
-export { addBookToFirestore };
+export { addBookToFirestore, removeBookFromFirestore };

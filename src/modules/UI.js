@@ -98,9 +98,7 @@ class UI {
   }
 
   handleRemoveBook(e, id) {
-    console.log('Removing book with id: ', id);
     this.library.removeBook(id);
-    console.log(this.library);
     this.update(this.library.books);
   }
 
