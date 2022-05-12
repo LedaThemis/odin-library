@@ -10,6 +10,7 @@ body {
 #header {
   display: flex;
   justify-content: center;
+  align-items: center;
 
   color: black;
   background-color: aquamarine;
@@ -124,6 +125,17 @@ body {
   font-family: inherit;
   font-weight: bold;
   font-size: 1.5rem;
+
+  cursor: pointer;
+}
+
+.sign-in-button {
+  background-color: transparent;
+  position: absolute;
+  right: 1rem;
+
+  font-family: Poppins;
+  font-size: 2rem;
 
   cursor: pointer;
 }
