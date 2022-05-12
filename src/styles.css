@@ -129,7 +129,7 @@ body {
   cursor: pointer;
 }
 
-.sign-in-button {
+#sign-in-button {
   background-color: transparent;
   position: absolute;
   right: 1rem;
