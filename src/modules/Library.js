@@ -5,20 +5,17 @@ class Library {
   }
 
   addBook(book) {
-    this.books.push(book);
-    addBookToFirestore(book);
+    const bookID = addBookToFirestore(book);
+
+    this.books.push({ book: book, id: bookID });
   }
 
-  appendBook(book) {
-    this.books.push(book);
+  appendBook(book, id) {
+    this.books.push({ book: book, id: id });
   }
 
-  removeAtIndex(arr, i) {
-    return arr.slice(0, i).concat(arr.slice(i + 1));
-  }
-
-  removeBook(i) {
-    this.books = this.removeAtIndex(this.books, i);
+  removeBook(bookID) {
+    this.books = this.books.filter(({ book, id }) => id !== bookID);
   }
 }
 

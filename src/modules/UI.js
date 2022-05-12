@@ -12,27 +12,27 @@ class UI {
     const booksContainer = document.querySelector('#books-container');
     booksContainer.replaceChildren();
     if (books) {
-      books.forEach((book, index) => this.appendBook(book, index));
+      books.forEach(({ book, id }) => this.appendBook(book, id));
     } else {
-      this.library.books.forEach((book, index) => this.appendBook(book, index));
+      this.library.books.forEach(({ book, id }) => this.appendBook(book, id));
     }
   }
 
-  appendBook(book, index) {
+  appendBook(book, id) {
     const bookContainer = document.querySelector('#books-container');
-    const bookHTML = this.getBookHTML(book, index);
+    const bookHTML = this.getBookHTML(book, id);
     bookContainer.appendChild(bookHTML);
   }
 
-  getBookHTML(book, i) {
+  getBookHTML(book, id) {
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
-    bookDiv.dataset.key = i;
+    bookDiv.dataset.key = id;
 
     const removeButton = document.createElement('button');
     removeButton.classList.add('remove--book--button');
     removeButton.textContent = '✕';
-    removeButton.addEventListener('click', (e) => this.handleRemoveBook(e, i));
+    removeButton.addEventListener('click', (e) => this.handleRemoveBook(e, id));
     bookDiv.appendChild(removeButton);
 
     const title = document.createElement('p');
@@ -59,7 +59,7 @@ class UI {
       readButton.classList.add('notread');
       readButton.textContent = 'Not read';
     }
-    readButton.addEventListener('click', (e) => this.handleUpdateReadStatus(e, i));
+    readButton.addEventListener('click', (e) => this.handleUpdateReadStatus(e, id));
 
     bookDiv.appendChild(readButton);
 
@@ -97,8 +97,10 @@ class UI {
     this.update(this.library.books);
   }
 
-  handleRemoveBook(e, i) {
-    this.library.removeBook(i);
+  handleRemoveBook(e, id) {
+    console.log('Removing book with id: ', id);
+    this.library.removeBook(id);
+    console.log(this.library);
     this.update(this.library.books);
   }
 

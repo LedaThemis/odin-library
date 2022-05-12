@@ -5,9 +5,10 @@ import './styles.css';
 import { firebaseConfig } from './config/firebaseConfig';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import Book from './modules/Book';
+import { async } from '@firebase/util';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -41,7 +42,7 @@ const authStateObserver = (user) => {
     signInButtonElement.setAttribute('hidden', 'true');
     signInNoticeElement.setAttribute('hidden', 'true');
 
-    readBooksFromFireStore().then((books) => appendBooks(books));
+    readBooksFromFirestore().then((books) => appendBooks(books));
   } else {
     userNameElement.setAttribute('hidden', 'true');
     userPicElement.setAttribute('hidden', 'true');
@@ -54,10 +55,10 @@ const authStateObserver = (user) => {
 };
 
 // UI
-const appendBook = (book) => {
+const appendBook = ({ id, book }) => {
   const { title, author, pages, isRead } = book;
   const bookObject = new Book(title, author, pages, isRead);
-  ui.library.appendBook(bookObject);
+  ui.library.appendBook(bookObject, id);
   ui.update();
 };
 
@@ -77,12 +78,14 @@ const addBookToFirestore = async (book) => {
       pages: book.pages,
       isRead: book.isRead,
     });
+
+    return docRef.id;
   } catch (error) {
     console.error('Error adding book: ', error);
   }
 };
 
-const readBooksFromFireStore = async () => {
+const readBooksFromFirestore = async () => {
   const resultArray = [];
 
   const currentUserUID = `${getAuth().currentUser.uid}`;
@@ -90,10 +93,16 @@ const readBooksFromFireStore = async () => {
   querySnapshot.forEach((doc) => {
     const { title, author, pages, isRead } = doc.data();
     console.log(`${doc.id} => ${title}, ${author}, ${pages}, ${isRead}`);
-    resultArray.push(doc.data());
+    resultArray.push({ id: doc.id, book: doc.data() });
   });
 
   return resultArray;
+};
+
+const removeBookFromFirestore = async () => {
+  const currentUserUID = `${getAuth().currentUser.uid}`;
+
+  await doc(db, currentUserUID);
 };
 
 // Helpers
