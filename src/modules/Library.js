@@ -1,4 +1,4 @@
-import { addBookToFirestore, removeBookFromFirestore } from '../index';
+import { addBookToFirestore, removeBookFromFirestore, updateReadStatusInFirestore } from '../index';
 class Library {
   constructor() {
     this.books = [];
@@ -25,6 +25,8 @@ class Library {
 
   updateBookReadStatus(bookID) {
     this.getBook(bookID).book.changeReadStatus();
+    const newBookReadStatus = this.getBook(bookID).book.isRead;
+    updateReadStatusInFirestore(bookID, newBookReadStatus);
   }
 }
 

@@ -5,10 +5,9 @@ import './styles.css';
 import { firebaseConfig } from './config/firebaseConfig';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 import Book from './modules/Book';
-import { async } from '@firebase/util';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -51,6 +50,8 @@ const authStateObserver = (user) => {
 
     signInButtonElement.removeAttribute('hidden');
     signInNoticeElement.removeAttribute('hidden');
+
+    ui.update([]);
   }
 };
 
@@ -91,8 +92,6 @@ const readBooksFromFirestore = async () => {
   const currentUserUID = `${getAuth().currentUser.uid}`;
   const querySnapshot = await getDocs(collection(db, currentUserUID));
   querySnapshot.forEach((doc) => {
-    const { title, author, pages, isRead } = doc.data();
-    console.log(`${doc.id} => ${title}, ${author}, ${pages}, ${isRead}`);
     resultArray.push({ id: doc.id, book: doc.data() });
   });
 
@@ -103,6 +102,16 @@ const removeBookFromFirestore = async (bookID) => {
   const currentUserUID = `${getAuth().currentUser.uid}`;
 
   await deleteDoc(doc(db, currentUserUID, bookID));
+};
+
+const updateReadStatusInFirestore = async (bookID, newReadStatus) => {
+  const currentUserUID = `${getAuth().currentUser.uid}`;
+
+  const bookDocRef = doc(db, currentUserUID, bookID);
+
+  await updateDoc(bookDocRef, {
+    isRead: newReadStatus,
+  });
 };
 
 // Helpers
@@ -139,4 +148,4 @@ addBookButton.addEventListener('click', (e) => {
   ui.handleAddBook(e);
 });
 
-export { addBookToFirestore, removeBookFromFirestore };
+export { addBookToFirestore, removeBookFromFirestore, updateReadStatusInFirestore };
