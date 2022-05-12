@@ -5,8 +5,9 @@ import './styles.css';
 import { firebaseConfig } from './config/firebaseConfig';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
+import Book from './modules/Book';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -39,6 +40,8 @@ const authStateObserver = (user) => {
 
     signInButtonElement.setAttribute('hidden', 'true');
     signInNoticeElement.setAttribute('hidden', 'true');
+
+    readBooksFromFireStore().then((books) => appendBooks(books));
   } else {
     userNameElement.setAttribute('hidden', 'true');
     userPicElement.setAttribute('hidden', 'true');
@@ -50,11 +53,25 @@ const authStateObserver = (user) => {
   }
 };
 
+// UI
+const appendBook = (book) => {
+  const { title, author, pages, isRead } = book;
+  const bookObject = new Book(title, author, pages, isRead);
+  ui.library.appendBook(bookObject);
+  ui.update();
+};
+
+const appendBooks = (books) => {
+  for (let i = 0; i < books.length; i++) {
+    appendBook(books[i]);
+  }
+};
+
 // Firestore
 const addBookToFirestore = async (book) => {
-  const currentUserUID = getAuth().currentUser.uid;
+  const currentUserUID = `${getAuth().currentUser.uid}`;
   try {
-    const docRef = await addDoc(collection(db, `${currentUserUID}`), {
+    const docRef = await addDoc(collection(db, currentUserUID), {
       title: book.title,
       author: book.author,
       pages: book.pages,
@@ -63,6 +80,20 @@ const addBookToFirestore = async (book) => {
   } catch (error) {
     console.error('Error adding book: ', error);
   }
+};
+
+const readBooksFromFireStore = async () => {
+  const resultArray = [];
+
+  const currentUserUID = `${getAuth().currentUser.uid}`;
+  const querySnapshot = await getDocs(collection(db, currentUserUID));
+  querySnapshot.forEach((doc) => {
+    const { title, author, pages, isRead } = doc.data();
+    console.log(`${doc.id} => ${title}, ${author}, ${pages}, ${isRead}`);
+    resultArray.push(doc.data());
+  });
+
+  return resultArray;
 };
 
 // Helpers

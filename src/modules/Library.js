@@ -9,6 +9,10 @@ class Library {
     addBookToFirestore(book);
   }
 
+  appendBook(book) {
+    this.books.push(book);
+  }
+
   removeAtIndex(arr, i) {
     return arr.slice(0, i).concat(arr.slice(i + 1));
   }

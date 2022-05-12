@@ -11,8 +11,11 @@ class UI {
   update(books) {
     const booksContainer = document.querySelector('#books-container');
     booksContainer.replaceChildren();
-
-    books.forEach((book, index) => this.appendBook(book, index));
+    if (books) {
+      books.forEach((book, index) => this.appendBook(book, index));
+    } else {
+      this.library.books.forEach((book, index) => this.appendBook(book, index));
+    }
   }
 
   appendBook(book, index) {
