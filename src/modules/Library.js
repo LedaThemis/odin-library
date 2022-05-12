@@ -1,3 +1,4 @@
+import { addBookToFirestore } from '../index';
 class Library {
   constructor() {
     this.books = [];
@@ -5,6 +6,7 @@ class Library {
 
   addBook(book) {
     this.books.push(book);
+    addBookToFirestore(book);
   }
 
   removeAtIndex(arr, i) {

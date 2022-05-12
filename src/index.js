@@ -1,17 +1,17 @@
 import UI from './modules/UI';
-import registerHandlers from './helpers/registerHandlers';
 
 import './styles.css';
 
 import { firebaseConfig } from './config/firebaseConfig';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Auth
 const signIn = async () => {
   const provider = new GoogleAuthProvider();
   await signInWithPopup(getAuth(), provider);
@@ -50,6 +50,21 @@ const authStateObserver = (user) => {
   }
 };
 
+// Firestore
+const addBookToFirestore = async (book) => {
+  const currentUserUID = getAuth().currentUser.uid;
+  try {
+    const docRef = await addDoc(collection(db, `${currentUserUID}`), {
+      title: book.title,
+      author: book.author,
+      pages: book.pages,
+      isRead: book.isRead,
+    });
+  } catch (error) {
+    console.error('Error adding book: ', error);
+  }
+};
+
 // Helpers
 const getProfilePicUrl = () => {
   return getAuth().currentUser.photoURL || '/assets/profile_placeholder.png';
@@ -74,4 +89,14 @@ initFirebaseAuth();
 // Library UI
 const ui = new UI();
 
-registerHandlers(ui, signIn);
+const newBookButton = document.querySelector('#add-new-book');
+const closeFormButton = document.querySelector('#close--form--button');
+const addBookButton = document.querySelector('#add-book');
+
+newBookButton.addEventListener('click', ui.handleNewBookClick);
+closeFormButton.addEventListener('click', ui.handleCloseFormClick);
+addBookButton.addEventListener('click', (e) => {
+  ui.handleAddBook(e);
+});
+
+export { addBookToFirestore };
