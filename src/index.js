@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
+import './styles.css';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyDsCqgjFt8vZQFTtd3sqjZ3_Tep0VJUy_s',
   authDomain: 'leda-odin-library.firebaseapp.com',
