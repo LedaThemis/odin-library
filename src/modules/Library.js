@@ -17,6 +17,14 @@ class Library {
   removeBook(bookID) {
     this.books = this.books.filter(({ book, id }) => id !== bookID);
   }
+
+  getBook(bookID) {
+    return this.books.find(({ book, id }) => id === bookID);
+  }
+
+  updateBookReadStatus(bookID) {
+    this.getBook(bookID).book.changeReadStatus();
+  }
 }
 
 export default Library;

@@ -104,8 +104,8 @@ class UI {
     this.update(this.library.books);
   }
 
-  handleUpdateReadStatus(e, i) {
-    this.library.books[i].changeReadStatus();
+  handleUpdateReadStatus(e, id) {
+    this.library.updateBookReadStatus(id);
     this.update(this.library.books);
   }
 }
