@@ -35,14 +35,18 @@ const authStateObserver = (user) => {
     userNameElement.removeAttribute('hidden');
     userPicElement.removeAttribute('hidden');
     signOutButtonElement.removeAttribute('hidden');
+    addBookButtonElement.removeAttribute('hidden');
 
     signInButtonElement.setAttribute('hidden', 'true');
+    signInNoticeElement.setAttribute('hidden', 'true');
   } else {
     userNameElement.setAttribute('hidden', 'true');
     userPicElement.setAttribute('hidden', 'true');
     signOutButtonElement.setAttribute('hidden', 'true');
+    addBookButtonElement.setAttribute('hidden', 'true');
 
     signInButtonElement.removeAttribute('hidden');
+    signInNoticeElement.removeAttribute('hidden');
   }
 };
 
@@ -54,7 +58,8 @@ const getProfilePicUrl = () => {
 const getUserName = () => {
   return getAuth().currentUser.displayName;
 };
-
+const signInNoticeElement = document.querySelector('#sign-in-notice');
+const addBookButtonElement = document.querySelector('#add-new-book');
 const userNameElement = document.querySelector('#profile--username');
 const userPicElement = document.querySelector('#profile--picture');
 const signInButtonElement = document.querySelector('#sign-in-button');
