@@ -129,7 +129,7 @@ body {
   cursor: pointer;
 }
 
-#sign-in-button {
+#sign-in-button, #sign-out-button {
   background-color: transparent;
   position: absolute;
   right: 1rem;
@@ -138,4 +138,22 @@ body {
   font-size: 2rem;
 
   cursor: pointer;
+}
+
+#profile-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  position: absolute;
+  left: 1rem;
+}
+
+#profile--picture {
+  width: 4rem;
+  border-radius: 50%;
+}
+
+#profile--username {
+  font-size: 1.5rem;
 }
