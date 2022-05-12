@@ -51,7 +51,7 @@ const authStateObserver = (user) => {
     signInButtonElement.removeAttribute('hidden');
     signInNoticeElement.removeAttribute('hidden');
 
-    ui.update([]);
+    ui.clearUI();
   }
 };
 

@@ -8,6 +8,11 @@ class UI {
     this.library = library;
   }
 
+  clearUI() {
+    this.library.clearBooks();
+    this.update(this.library.books);
+  }
+
   update(books) {
     const booksContainer = document.querySelector('#books-container');
     booksContainer.replaceChildren();

@@ -28,6 +28,10 @@ class Library {
     const newBookReadStatus = this.getBook(bookID).book.isRead;
     updateReadStatusInFirestore(bookID, newBookReadStatus);
   }
+
+  clearBooks() {
+    this.books = [];
+  }
 }
 
 export default Library;
