@@ -1,0 +1,129 @@
+html {
+  font-family: Poppins, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+/* HEADER */
+#header {
+  display: flex;
+  justify-content: center;
+
+  color: black;
+  background-color: aquamarine;
+}
+
+/* MAIN */
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 2rem;
+}
+
+/* BOOK */
+#books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+
+  width: 100%;
+}
+
+.book {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  border: 0.2rem solid burlywood;
+
+  background-color: antiquewhite;
+}
+
+.book--title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.book--author {
+  font-size: 1.5rem;
+}
+
+.book--read--button {
+  border: none;
+  height: 3rem;
+  width: 100%;
+
+  font-family: inherit;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.read {
+  background-color: lightgreen;
+}
+
+.notread {
+  background-color: lightcoral;
+}
+
+.remove--book--button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  font-size: 1.5rem;
+
+  align-self: flex-end;
+  justify-self: flex-start;
+
+  cursor: pointer;
+}
+
+.remove--book--button:hover {
+  color: red;
+}
+
+/* FORM */
+#add-book-form {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+
+  color: white;
+  background-color: #2e9960;
+  padding: 1rem;
+}
+
+#add-book-form > p {
+  align-self: center;
+}
+
+#add-book-form > button {
+  border: none;
+  color: white;
+  padding: 0.2rem;
+  background-color: #15673b;
+  cursor: pointer;
+}
+
+#close--form--button {
+  align-self: flex-end;
+}
+
+/* ADD NEW BOOK */
+#add-new-book {
+  border: none;
+  background-color: rgb(0, 255, 170);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 1.5rem;
+
+  cursor: pointer;
+}
